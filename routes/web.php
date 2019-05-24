@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Generic testing route
+//Generic testing routes
 Route::get('/test', 'TestController@test')->name('test');
+Route::get('/test2', 'TestController@test2')->name('test2');
+
 
 
 Route::get('/index', 'HomeController@index')->name('home');

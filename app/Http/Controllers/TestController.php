@@ -9,8 +9,16 @@ class TestController extends Controller
 
     function test () {
 
-        $response = GuzzleClient::client()->request('GET', 'projects');
+        $response = Helper::client()->request('GET', 'projects');
 
         return $response;
+    }
+
+    function test2 () {
+
+
+        $res = Helper::db()->from('projects.1.issues')->get();
+        dd($res);
+
     }
 }

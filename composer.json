@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "nahid/jsonq": "^5.2",
         "symfony/psr-http-message-bridge": "^1.2"
     },
     "require-dev": {
