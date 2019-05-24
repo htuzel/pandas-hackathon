@@ -1,6 +1,6 @@
 # Estimation Search Engine
 
-![alt text](hhttps://github.com/hayreddintuzel/pandas-hackathon/blob/master/ese_logo.png)
+![alt text](https://raw.githubusercontent.com/hayreddintuzel/pandas-hackathon/master/ese_logo.png)
 
 ## Jira Dummy Data
 ```
