@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', 'HomeController@index')->name('home');
+//Generic testing route
+Route::get('/test', 'TestController@test')->name('test');
 
+
+Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/results', 'SearchController@index')->name('results');
 Route::get('/recommendations', 'SearchController@recommendations')->name('recommendations');
