@@ -77,7 +77,7 @@ class SearchController extends Controller
             }
         }
 
-        return view('home')->with('resultArray');
+        return view('search/index')->with('resultArray', json_encode($resultArray));
     }
 
     public function recommendations(Request $request)
