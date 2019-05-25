@@ -20,5 +20,6 @@
 </head>
 <body>
     @yield('content')
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 </body>
 </html>

@@ -36843,6 +36843,35 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(document).ready(function () {
+  var bloodhound = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/recommendations?q=%QUERY%',
+      wildcard: '%QUERY%'
+    }
+  });
+  $('#searchForm #search').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  }, {
+    name: 'users',
+    source: bloodhound,
+    display: function display(data) {
+      return data; //Input value to be set when you select a suggestion. 
+    },
+    templates: {
+      empty: ['<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'],
+      header: ['<div class="list-group search-results-dropdown">'],
+      suggestion: function suggestion(data) {
+        return '<div class="list-group-item">' + data + '</div></div>';
+      }
+    }
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36921,8 +36950,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/hayreddintuzel/Desktop/Projects/pandas-hackathon/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/hayreddintuzel/Desktop/Projects/pandas-hackathon/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\OSFNEWCOMER-5\Desktop\Repos\pandas-hackathon\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\OSFNEWCOMER-5\Desktop\Repos\pandas-hackathon\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

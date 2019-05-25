@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center my-3">
             <div class="col-md-1">
-                <img src="{{ asset('ese_logo.png') }}" class="logo-mini d-block mx-auto" />
+                <a href="/"><img src="{{ asset('ese_logo.png') }}" class="logo-mini d-block mx-auto" /></a>
             </div>
             <div class="col-md-5">
                 <form class="form-horizontal" id="searchForm" enctype="multipart/form-data" method="POST" action="{{ url('/search') }}">
@@ -40,10 +40,10 @@
             <tr class="table-warning">
                 <th scope="col">#</th>
                 <th scope="col">Project Name</th>
+                <th scope="col">Component Name</th>
                 <th scope="col">Estimated</th>
                 <th scope="col">Logged</th>
                 <th scope="col">Bug Count</th>
-                <th scope="col">Component Name</th>
             </tr>
         </thead>
         <tbody>
@@ -59,10 +59,10 @@
                 @endphp
                 <th scope="row">{{ $loop->index+1 }}</th>
                 <td>{{ $result->project }}</td>
+                <td>{{ $result->componentName }}</td>
                 <td>{{ $estimateDay."d ".$estimateHour."h ".$estimateMinute."m" }}</td>
                 <td>{{ $loggedDay."d ".$loggedHour."h ".$loggedMinute."m" }}</td>
                 <td>{{ $result->numberOfBugs }}</td>
-                <td>{{ $result->componentName }}</td>
             </tr>
             @endforeach
         </tbody>
