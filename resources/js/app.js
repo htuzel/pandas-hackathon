@@ -39,4 +39,10 @@ $(document).ready(function() {
             }
         }
     });
+
+    $(document).on('change', '#select-all', function() {
+        var form = $(this).closest("form");
+        form.find('th input[type=checkbox]').prop('checked', this.checked);
+    });
+
 });
