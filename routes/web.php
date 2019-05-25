@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //Generic testing routes
 Route::get('/test', 'TestController@test')->name('test');
@@ -27,7 +24,7 @@ Route::get('/components', 'ProjectController@components')->name('components');
 Route::get('/issues', 'ProjectController@issues')->name('issues');
 
 
-Route::get('/index', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/results', 'SearchController@index')->name('results');
 Route::get('/recommendations', 'SearchController@recommendations')->name('recommendations');
