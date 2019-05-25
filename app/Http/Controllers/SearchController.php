@@ -77,7 +77,7 @@ class SearchController extends Controller
     {
         $componentNames = Helper::componentNames();
         $filtered = $componentNames->filter(function($value, $key) use ($request) {
-            return strpos($value, $request->input('q')) !== false;
+            return stripos($value, $request->input('q')) !== false;
         });
 
         return $filtered;
