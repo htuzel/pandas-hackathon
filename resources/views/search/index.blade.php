@@ -35,45 +35,47 @@
         </div>
     @else
     <h2 class="mb-4">Search Results:</h2>
-    <table class="table table-hover mb-5">
-        <thead>
-            <tr class="table-warning">
-                <th scope="col">#</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Component Name</th>
-                <th scope="col">Estimated</th>
-                <th scope="col">Logged</th>
-                <th scope="col">Bug Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($resultJSON as $result)
-            <tr>
-                @php
-                    $estimateDay = floor($result->originalEstimate / 1440);
-                    $estimateHour = floor(($result->originalEstimate - $estimateDay * 1440) / 60);
-                    $estimateMinute = $result->originalEstimate - ($estimateDay * 1440) - ($estimateHour * 60);
-                    $loggedDay = floor($result->realTime / 1440);
-                    $loggedHour = floor(($result->realTime - $loggedDay * 1440) / 60);
-                    $loggedMinute = $result->realTime - ($loggedDay * 1440) - ($loggedHour * 60);
-                @endphp
-                <th scope="row">{{ $loop->index+1 }}</th>
-                <td>{{ $result->project }}</td>
-                <td>{{ $result->componentName }}</td>
-                <td>{{ $estimateDay."d ".$estimateHour."h ".$estimateMinute."m" }}</td>
-                <td>{{ $loggedDay."d ".$loggedHour."h ".$loggedMinute."m" }}</td>
-                <td>{{ $result->numberOfBugs }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div class="text-center">
-        <form class="form-horizontal" id="searchForm" enctype="multipart/form-data" method="POST" action="{{ url('/estimation') }}">
-            {{ csrf_field() }}
+    <form class="form-horizontal" id="estimationForm" enctype="multipart/form-data" method="POST" action="{{ url('/estimation') }}">
+        {{ csrf_field() }}
+        <table class="table table-hover mb-5">
+            <thead>
+                <tr class="table-warning">
+                    <th scope="col"><input type="checkbox" id="select-all"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Component Name</th>
+                    <th scope="col">Estimated</th>
+                    <th scope="col">Logged</th>
+                    <th scope="col">Bug Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($resultJSON as $result)
+                <tr>
+                    @php
+                        $estimateDay = floor($result->originalEstimate / 1440);
+                        $estimateHour = floor(($result->originalEstimate - $estimateDay * 1440) / 60);
+                        $estimateMinute = $result->originalEstimate - ($estimateDay * 1440) - ($estimateHour * 60);
+                        $loggedDay = floor($result->realTime / 1440);
+                        $loggedHour = floor(($result->realTime - $loggedDay * 1440) / 60);
+                        $loggedMinute = $result->realTime - ($loggedDay * 1440) - ($loggedHour * 60);
+                    @endphp
+                    <th scope="row"><input type="checkbox" name="component[]" value="{{ $loop->index+1 }}"></th>
+                    <th scope="row">{{ $loop->index+1 }}</th>
+                    <td>{{ $result->project }}</td>
+                    <td>{{ $result->componentName }}</td>
+                    <td>{{ $estimateDay."d ".$estimateHour."h ".$estimateMinute."m" }}</td>
+                    <td>{{ $loggedDay."d ".$loggedHour."h ".$loggedMinute."m" }}</td>
+                    <td>{{ $result->numberOfBugs }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="text-right">
             <input type="hidden" name="search_string" value="{{ $searchQuery }}"/>
-            <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Recommend me an <b>Estimation</b></button>
-        </form>
-    </div>
+            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-project-diagram"></i> Recommend me an <b>Estimation</b> <i class="fa fa-angle-right"></i></button>
+        </div>
+    </form>
     @endif
 </div>
 
