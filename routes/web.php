@@ -20,7 +20,7 @@ Route::get('/test3', 'TestController@test3')->name('test3');
 //API
 Route::get('/projects', 'ProjectController@projects')->name('projects');
 Route::get('/users', 'ProjectController@users')->name('users');
-Route::get('/components', 'ProjectController@components')->name('components');
+Route::get('/components', 'ProjectController@componentNames')->name('components');
 Route::get('/issues', 'ProjectController@issues')->name('issues');
 
 

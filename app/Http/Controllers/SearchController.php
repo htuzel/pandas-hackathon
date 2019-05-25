@@ -73,9 +73,14 @@ class SearchController extends Controller
         return view('home')->with('resultArray');
     }
 
-    public function recommendations()
+    public function recommendations(Request $request)
     {
-        $recommendations = null;
-        return view('search/recommendations', compact('recommendations'));
+        $componentNames = Helper::componentNames();
+        $filtered = $componentNames->filter(function($value, $key) use ($request) {
+            return strpos($value, $request->input('q')) !== false;
+        });
+
+        return $filtered;
+
     }
 }
