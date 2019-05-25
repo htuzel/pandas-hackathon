@@ -70,7 +70,7 @@ class SearchController extends Controller
             }
         }
 
-        return $resultArray;//view('home')->with('resultArray');
+        return view('home')->with('resultArray');
     }
 
     public function recommendations()
