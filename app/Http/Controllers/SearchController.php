@@ -37,7 +37,7 @@ class SearchController extends Controller
         return $filtered;
     }
 
-    public function results (Request $request) {
+    public function estimation (Request $request) {
         $request->validate([
             'search_string' => 'required'
         ]);
@@ -45,6 +45,6 @@ class SearchController extends Controller
         $searchQuery = $request->input('search_string');
         $resultArray = Helper::getSearchResults($searchQuery);
 
-        return view('search/results', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
+        return view('search/estimation', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
     }
 }
