@@ -71,7 +71,7 @@
         <form class="form-horizontal" id="searchForm" enctype="multipart/form-data" method="POST" action="{{ url('/estimation') }}">
             {{ csrf_field() }}
             <input type="hidden" name="search_string" value="{{ $searchQuery }}"/>
-            <button type="submit class="btn btn-success btn-lg"><i class="fa fa-check"></i> Recommend me an <b>Estimation</b></button>
+            <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Recommend me an <b>Estimation</b></button>
         </form>
     </div>
     @endif
