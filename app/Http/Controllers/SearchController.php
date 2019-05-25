@@ -79,6 +79,7 @@ class SearchController extends Controller
         }
 
         return view('search/index', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
+        //return json_encode($resultArray);
     }
 
     public function recommendations(Request $request)

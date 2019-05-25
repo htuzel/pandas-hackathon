@@ -10670,17 +10670,6 @@ body {
   font-family: "PT Sans", sans-serif;
 }
 
-.round {
-  width: 100%;
-  border-radius: 15px;
-  border: 1px #000 solid;
-  padding: 5px 5px 5px 25px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-}
-
 .logo {
   max-height: 250px;
 }
@@ -10694,5 +10683,9 @@ h1.site-name {
 .twitter-typeahead {
   width: 300px !important;
   height: 30px;
+}
+
+.logo-mini {
+  max-width: 50px;
 }
 
