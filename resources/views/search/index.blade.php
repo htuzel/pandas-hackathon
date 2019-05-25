@@ -32,6 +32,7 @@
                 <th scope="col">Estimated</th>
                 <th scope="col">Logged</th>
                 <th scope="col">Bug Count</th>
+                <th scope="col">Component Name</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                 <td>{{ $estimateDay."d ".$estimateHour."h ".$estimateMinute."m" }}</td>
                 <td>{{ $loggedDay."d ".$loggedHour."h ".$loggedMinute."m" }}</td>
                 <td>{{ $result->numberOfBugs }}</td>
+                <td>{{ $result->componentName }}</td>
             </tr>
             @endforeach
         </tbody>

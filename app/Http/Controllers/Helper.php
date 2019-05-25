@@ -77,4 +77,18 @@ class Helper {
         ]);
     }
 
+    public static function fixSearchString($string)
+    {
+        $components = Helper::componentNames();
+        $result = [];
+
+        foreach ($components as $component) {
+            if (preg_match("/(?i)({$string})/", $component)) {
+                array_push($result, $component);
+            }
+        }
+
+        return $result;
+    }
+
 }
