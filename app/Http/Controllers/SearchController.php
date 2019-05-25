@@ -34,6 +34,7 @@ class SearchController extends Controller
             $worklogArray = [];
             $bugArray = [];
             $writeAccess = false; // Ignore empty worklogs
+            $totalSpendTime = 0;
             
             if ($issues != null) {
 
@@ -50,9 +51,11 @@ class SearchController extends Controller
                                     if ($issue['issueType'] != 'Bug') {
                                         array_push($worklogArray, $item);
                                         $projectArray['logs'] = $worklogArray;
+                                        //$projectArray['logs']['originalEstimate'] = $issue['originalEstimate'];
                                     } else {
                                         array_push($bugArray, $item);
                                         $projectArray['bugs'] = $bugArray;
+                                        //$projectArray['bugs']['originalEstimate'] = $issue['originalEstimate'];
                                     }
                                 }
                             }
@@ -66,7 +69,7 @@ class SearchController extends Controller
             }
         }
 
-        return $resultArray;
+        return view('home')->with('resultArray');
     }
 
     public function recommendations()
