@@ -57,7 +57,7 @@ class Helper {
         $temp2 = str_replace('T', '', $temp1);
         $temp3 = str_replace('H', ':', $temp2);
         $convertedTime = implode('', $temp3);
-        
+
         if (last($temp3) == ':') {
             $convertedTime = $convertedTime.'00';
         }
@@ -75,6 +75,23 @@ class Helper {
             'convertedTime' => $convertedTime,
             'calculateSecond' => $calculateSecond
         ]);
+    }
+
+    public static function userRole($username) {
+        $length = strlen($username);
+        if (($length % 6) == 1) {
+            return 'BD';
+        } elseif (($length % 6) == 2) {
+            return 'FD';
+        } elseif (($length % 6) == 3) {
+            return 'SA';
+        } elseif (($length % 6) == 4) {
+            return 'QA';
+        } elseif (($length % 6) == 5) {
+            return 'PM';
+        } else {
+            return 'BA';
+        }
     }
 
 }
