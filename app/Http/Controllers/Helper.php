@@ -157,7 +157,6 @@ class Helper {
                                         if ($issue['issueType'] != 'Bug') {
                                             array_push($worklogArray, $item);
                                             $projectArray['logs'] = $worklogArray;
-                                            $projectArray['departmenents'] = Helper::calculateDepartment($issue['worklogs']);
                                         } else {
                                             $bugCounter++;
                                             array_push($bugArray, $item);
@@ -172,6 +171,7 @@ class Helper {
                     if ($writeAccess) {
                         $projectArray['numberOfBugs'] = $bugCounter;
                         $projectArray['componentName'] = $searchEngine;
+                        $projectArray['departmenents'] = Helper::calculateDepartment($projectArray['logs']);
                         array_push($resultArray, $projectArray);
                     }
                 }
