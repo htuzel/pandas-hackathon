@@ -23,6 +23,17 @@
     </div>
 </div>
 <div class="container">
+    @php
+        $resultJSON = json_decode($resultArray);
+    @endphp
+    @if (count($resultJSON) == 0)
+        <div class="jumbotron">
+            <h1 class="display-4">Sorry, No result found <i class="far fa-sad-cry"></i></h1>
+            <p class="lead">Please try again with a new keyword.</p>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-angle-left"></i> Go Back</a>
+        </div>
+    @else
     <h2 class="mb-4">Search Results:</h2>
     <table class="table table-hover mb-5">
         <thead>
@@ -35,7 +46,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (json_decode($resultArray) as $result)
+            @foreach ($resultJSON as $result)
             <tr>
                 @php
                     $estimateDay = floor($result->originalEstimate / 1440);
@@ -57,6 +68,7 @@
     <div class="text-center">
         <a href="#" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Recommend me an <b>Estimation</b></a>
     </div>
+    @endif
 </div>
 
 @endsection
