@@ -26,5 +26,5 @@ Route::get('/issues', 'ProjectController@issues')->name('issues');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/search', 'SearchController@search')->name('search');
-Route::get('/results', 'SearchController@index')->name('results');
+Route::post('/estimation', 'SearchController@estimation')->name('estimation');
 Route::get('/recommendations', 'SearchController@recommendations')->name('recommendations');
