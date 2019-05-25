@@ -17,6 +17,7 @@ class SearchController extends Controller
     public function search(SearchRequest $request)
     {
         $resultArray = []; // Stores trimmed results
+        $searchQuery = $request->search_string;
         $client = new Client();
 
         $response = $client->get('http://localhost:3004/projects', [
@@ -45,7 +46,7 @@ class SearchController extends Controller
                     $issueComponenets = $issue['components'];
 
                     foreach ($issueComponenets as $issueComponenet) {
-                        if (!strcasecmp($issueComponenet, $request->search_string)) { // Ignoring case sensitive search
+                        if (!strcasecmp($issueComponenet, $searchQuery)) { // Ignoring case sensitive search
                             if (count($issue['worklogs']) > 0) {
                                 $writeAccess = true;
                                 $projectArray['project'] = $result['name'];
@@ -77,7 +78,7 @@ class SearchController extends Controller
             }
         }
 
-        return view('search/index')->with('resultArray', json_encode($resultArray));
+        return view('search/index', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
     }
 
     public function recommendations(Request $request)
