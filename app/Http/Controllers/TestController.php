@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 
 class TestController extends Controller
 {
@@ -15,10 +17,17 @@ class TestController extends Controller
     }
 
     function test2 () {
+        $client = new Client();
 
+        $response = $client->get('http://localhost:3004/projects?name=Squeaky Afterthought', [
+            'headers' => [
+                'Accept ' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
 
-        $res = Helper::db()->from('projects.1.issues')->get();
-        dd($res);
+        $results = json_decode($response->getBody(), true);
 
+        return $results;
     }
 }

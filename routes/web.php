@@ -22,5 +22,6 @@ Route::get('/test2', 'TestController@test2')->name('test2');
 
 
 Route::get('/index', 'HomeController@index')->name('home');
+Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/results', 'SearchController@index')->name('results');
 Route::get('/recommendations', 'SearchController@recommendations')->name('recommendations');
