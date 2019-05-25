@@ -35,6 +35,9 @@ class SearchController extends Controller
             $bugArray = [];
             $writeAccess = false; // Ignore empty worklogs
             $totalSpendTime = 0;
+            $projectArray['realTime'] = 0;
+            $projectArray['originalEstimate'] = 0;
+            $bugCounter = 0;
             
             if ($issues != null) {
 
@@ -46,25 +49,29 @@ class SearchController extends Controller
                             if (count($issue['worklogs']) > 0) {
                                 $writeAccess = true;
                                 $projectArray['project'] = $result['name'];
+                                $projectArray['originalEstimate'] += Helper::convertJiraTime($issue['originalEstimate'])->getData()->calculateSecond;
 
                                 foreach ($issue['worklogs'] as $item) {
+                                    $processedTime = Helper::convertJiraTime($item['timeSpent'])->getData();
+                                    $item['timeSpent'] = $processedTime->convertedTime;
+                                    $projectArray['realTime'] += $processedTime->calculateSecond;
+                                    
                                     if ($issue['issueType'] != 'Bug') {
                                         array_push($worklogArray, $item);
                                         $projectArray['logs'] = $worklogArray;
                                     } else {
+                                        $bugCounter++;
                                         array_push($bugArray, $item);
                                         $projectArray['bugs'] = $bugArray;
                                     }
                                 }
-
-                                $projectArray['originalEstimate'] = 80;
-                                $projectArray['realTime'] = 100;
                             }
                         }
                     }
                 }
 
                 if ($writeAccess) {
+                    $projectArray['numberOfBugs'] = $bugCounter;
                     array_push($resultArray, $projectArray);
                 }
             }

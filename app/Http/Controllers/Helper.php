@@ -49,5 +49,32 @@ class Helper {
         return collect($components);
     }
 
+    public static function convertJiraTime($jiraTime)
+    {
+        $arrayTime = str_split($jiraTime);
+        $convertedTime = null;
+        $temp1 = str_replace('P', '', $arrayTime);
+        $temp2 = str_replace('T', '', $temp1);
+        $temp3 = str_replace('H', ':', $temp2);
+        $convertedTime = implode('', $temp3);
+        
+        if (last($temp3) == ':') {
+            $convertedTime = $convertedTime.'00';
+        }
+
+        if (last($temp3) == 'M' && !preg_match("/:/", $convertedTime)) {
+            $convertedTime = '00:'.$convertedTime;
+        }
+
+        $convertedTime = str_replace('M', '', $convertedTime);
+
+        $calculateSecondArray = explode(':', $convertedTime);
+        $calculateSecond = $calculateSecondArray[0] * 60 + $calculateSecondArray[1];
+
+        return response()->json([
+            'convertedTime' => $convertedTime,
+            'calculateSecond' => $calculateSecond
+        ]);
+    }
 
 }
