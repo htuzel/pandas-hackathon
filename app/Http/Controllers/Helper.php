@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Nahid\JsonQ\Jsonq;
+use Illuminate\Support\Collection;
 
 
 class Helper {
@@ -21,4 +22,32 @@ class Helper {
         $q = new Jsonq($dir . '/db.json');
         return $q;
     }
+
+    public static function projects() {
+        $projects = self::db()->from('projects')
+                        ->get();
+        return collect($projects);
+    }
+
+    public static function users() {
+        $users = self::db()->from('users')
+                        ->get();
+        return collect($users);
+    }
+
+    public static function componentNames () {
+        $projectsCount = self::db()->from('projects')
+                            ->count();
+
+        $components = [];
+        for ($i = 0; $i<$projectsCount; $i++) {
+            $tempComponents = self::db()->from('projects.' . $i . '.components')
+                            ->get();
+            $components = array_merge($components,$tempComponents);
+        }
+        $components = array_unique($components);
+        return collect($components);
+    }
+
+
 }
