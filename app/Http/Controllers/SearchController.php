@@ -51,13 +51,14 @@ class SearchController extends Controller
                                     if ($issue['issueType'] != 'Bug') {
                                         array_push($worklogArray, $item);
                                         $projectArray['logs'] = $worklogArray;
-                                        //$projectArray['logs']['originalEstimate'] = $issue['originalEstimate'];
                                     } else {
                                         array_push($bugArray, $item);
                                         $projectArray['bugs'] = $bugArray;
-                                        //$projectArray['bugs']['originalEstimate'] = $issue['originalEstimate'];
                                     }
                                 }
+
+                                $projectArray['originalEstimate'] = 80;
+                                $projectArray['realTime'] = 100;
                             }
                         }
                     }
