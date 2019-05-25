@@ -108,4 +108,42 @@ class Helper {
         return $result;
     }
 
+    public static function calculateDepartment($workLogs)
+    {
+        $workLogArray['BD'] = 0;
+        $workLogArray['FD'] = 0;
+        $workLogArray['SA'] = 0;
+        $workLogArray['QA'] = 0;
+        $workLogArray['PM'] = 0;
+        $workLogArray['BA'] = 0;
+
+        foreach ($workLogs as $workLog) {
+            $userDepartman = Helper::userRole($workLog['author']);
+            $spendTime = 0;
+
+            switch ($userDepartman) {
+                case 'BD':
+                    $workLogArray['BD'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;
+                    break;
+                case 'FD':
+                    $workLogArray['FD'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;
+                    break;
+                case 'SA':
+                    $workLogArray['SA'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;;
+                    break;
+                case 'QA':
+                    $workLogArray['QA'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;
+                    break;
+                case 'PM':
+                    $workLogArray['PM'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;
+                    break;
+                case 'BA':
+                    $workLogArray['BA'] += Helper::convertJiraTime($workLog['timeSpent'])->getData()->calculateSecond;
+                    break;
+            }
+        }
+
+        return $workLogArray;
+    }
+
 }

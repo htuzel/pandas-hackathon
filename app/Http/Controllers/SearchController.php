@@ -63,6 +63,7 @@ class SearchController extends Controller
                                         if ($issue['issueType'] != 'Bug') {
                                             array_push($worklogArray, $item);
                                             $projectArray['logs'] = $worklogArray;
+                                            $projectArray['departmenents'] = Helper::calculateDepartment($issue['worklogs']);
                                         } else {
                                             $bugCounter++;
                                             array_push($bugArray, $item);
