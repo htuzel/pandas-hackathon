@@ -16,6 +16,10 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'search_string' => 'required'
+        ]);
+
         $searchQuery = $request->input('search_string');
         $resultArray = Helper::getSearchResults($searchQuery);
 
