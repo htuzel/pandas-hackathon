@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function index()
     {
         $results = null;
-        return view('search/index', compact('results'));
+        return view('search/results', compact('results'));
     }
 
     public function search(Request $request)
@@ -35,6 +35,16 @@ class SearchController extends Controller
         });
 
         return $filtered;
+    }
 
+    public function results (Request $request) {
+        $request->validate([
+            'search_string' => 'required'
+        ]);
+
+        $searchQuery = $request->input('search_string');
+        $resultArray = Helper::getSearchResults($searchQuery);
+
+        return view('search/results', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
     }
 }
