@@ -102,13 +102,17 @@ class Helper {
 
         foreach ($components as $component) {
             if (!is_array($string)) {
-                if (preg_match("/(?i)({$string})/", $component)) {
-                    array_push($result, $component);
+                if (Helper::countString($string)) {
+                    if (preg_match("/(?i)({$string})/", $component)) {
+                        array_push($result, $component);
+                    }
                 }
             } else {
                 foreach ($string as $item) {
-                    if (preg_match("/(?i)({$item})/", $component)) {
-                        array_push($result, $component);
+                    if (Helper::countString($item)) {
+                        if (preg_match("/(?i)({$item})/", $component)) {
+                            array_push($result, $component);
+                        }
                     }
                 }
             }
@@ -117,10 +121,22 @@ class Helper {
         return $result;
     }
 
+    public static function countString($string)
+    {
+        if (strlen($string) > 2) {
+            return true;
+        }
+        return false;
+    }
+
     public static function getSearchResults($searchQuery) {
         $searchEngines = Helper::fixSearchString($searchQuery);
         $results = self::db()->from('projects')->get();
         $resultArray = []; // Stores trimmed results
+
+        if (count($searchEngines) == 0) {
+            return $resultArray;
+        }
 
         foreach ($searchEngines as $searchEngine) {
             foreach ($results as $result){
