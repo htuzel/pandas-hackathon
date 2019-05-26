@@ -36955,8 +36955,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\OSFNEWCOMER-5\Desktop\Repos\pandas-hackathon\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\OSFNEWCOMER-5\Desktop\Repos\pandas-hackathon\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/hayreddintuzel/Desktop/Projects/pandas-hackathon/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/hayreddintuzel/Desktop/Projects/pandas-hackathon/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

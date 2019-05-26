@@ -103,6 +103,19 @@ var SA = [];
 var QA = [];
 var PM = [];
 var BA = [];
+var timeBD = 0;
+var timeFD = 0;
+var timeSA = 0;
+var timeQA = 0;
+var timePM = 0;
+var timeBA = 0;
+var timeTotal = 0;
+var percBD = 0;
+var percFD = 0;
+var percSA = 0;
+var percQA = 0;
+var percPM = 0;
+var percBA = 0;
 
 
 @foreach($resultJSON as $result)
@@ -116,6 +129,25 @@ var BA = [];
     PM.push('{{$result->departmenents->PM}}');
     BA.push('{{$result->departmenents->BA}}');
 @endforeach
+
+
+for (var i = 0; i<BD.length; i++ ) {
+    timeBD += parseInt(BD[i])
+    timeFD += parseInt(FD[i])
+    timeSA += parseInt(SA[i])
+    timeQA += parseInt(QA[i])
+    timePM += parseInt(PM[i])
+    timeBA += parseInt(BA[i])
+}
+timeTotal = timeBD + timeFD + timeSA + timeQA + timePM + timeBA;
+
+
+percBD = timeBD  * 100 / timeTotal;
+percFD = timeFD  * 100 / timeTotal;
+percSA = timeSA  * 100 / timeTotal;
+percQA = timeQA  * 100 / timeTotal;
+percPM = timePM  * 100 / timeTotal;
+percBA = timeBA  * 100 / timeTotal;
 
 var project = 0;
 
@@ -171,7 +203,6 @@ myDoughnut = new Chart(ctpie, {
 $(document).ready(function(){
     $('input[type=radio]').click(function(){
         project = this.value;
-        console.log(project);
         myDoughnut.data.datasets[0].data = [
 	    	BD[project],
 	    	FD[project],
@@ -251,7 +282,13 @@ for (var i = 0; i < estimatedTimes.length; i++) {
 }
 
 var estimationResult = knn(outputs, 2);
-$('#estimation').html(estimationResult);
+$('#total').html(estimationResult);
+$('#bd').html( Math.round(percBD * estimationResult / 100) );
+$('#fd').html( Math.round(percFD * estimationResult / 100) );
+$('#sa').html( Math.round(percSA * estimationResult / 100) );
+$('#qa').html( Math.round(percQA * estimationResult / 100) );
+$('#pm').html( Math.round(percPM * estimationResult / 100) );
+$('#ba').html( Math.round(percBA * estimationResult / 100) );
 
 function distiance(pointA, pointB) {
     return _.chain(pointA)
