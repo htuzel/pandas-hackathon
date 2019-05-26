@@ -26,50 +26,69 @@
     @php
         $resultJSON = json_decode($resultArray);
     @endphp
-   
-    <h4 class="mb-4">The Estimation Of Esè : </h4>
-    <div class=row>
-        <div class="resultcard card col-12 p-5">
-           <span id="estimation"></span>
+
+    <div class="card mb-5">
+        <div class="card-header"><h3>The Estimation Of Esè : </h3></div>
+        <div class="card-body">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr class="table-warning">
+                        <th scope="row">TOTAL</th>
+                        <th scope="row">Solution Architecture</th>
+                        <th scope="row">Backend Development</th>
+                        <th scope="row">Frontend Development</th>
+                        <th scope="row">Project Management</th>
+                        <th scope="row">Business Analyse</th>
+                        <th scope="row">Quality Assurance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span id="total"></span></td>
+                        <td><span id="sa"></span></td>
+                        <td><span id="bd"></span></td>
+                        <td><span id="fd"></span></td>
+                        <td><span id="pm"></span></td>
+                        <td><span id="ba"></span></td>
+                        <td><span id="qa"></span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="resultcard card">
-              <div class="card-body">
-                    <div/>
-                        <canvas id="Chart"></canvas>
-                    </div>
-                </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="bar-chart" data-toggle="tab" href="#bar-tab"><i class="far fa-chart-bar"></i> Bar Chart</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pie-chart" data-toggle="tab" href="#pie-tab"><i class="fas fa-chart-pie"></i> Pie Chart</a>
+        </li>
+    </ul>
+    <div class="tab-content mb-5">
+        <div class="tab-pane fade show active" id="bar-tab">
+            <div class="p-4">
+                <canvas id="Chart"></canvas>
             </div>
         </div>
-    </div>
-    <div class="resultcard card my-5 p-4">
-        <div class="row">
-            <div class="col-9">
-                <div class="card">
-                  <div class="card-body">
-                    <div>
-                        <canvas id="Pie"></canvas>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="resultcard card">
-                  <div class="card-body">
+        <div class="tab-pane fade" id="pie-tab">
+            <div class="row p-4">
+                <div class="col-9"><canvas id="Pie"></canvas></div>
+                <div class="col-3">
+                    <div class="pt-4">
                     @foreach($resultJSON as $indexkey => $result)
                         <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input"  value="{{$indexkey}}" name="project"  id="{{$indexkey}}" @if($indexkey ==0) checked @endif >{{$result->project}}
-                          </label>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input"  value="{{$indexkey}}" name="project"  id="{{$indexkey}}" @if($indexkey ==0) checked @endif >{{$result->project}}
+                            </label>
                         </div>
                     @endforeach
-                  </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <script>

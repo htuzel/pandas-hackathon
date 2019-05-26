@@ -34,7 +34,17 @@
             <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button"><i class="fa fa-angle-left"></i> Go Back</a>
         </div>
     @else
-    <h2 class="mb-4">Search Results:</h2>
+    <div class="row">
+        <div class="col-6"><h2 class="mb-4">Search Results:</h2></div>
+        <div class="col-6 text-right">
+            Filter results by Component: 
+            <select class="selectpicker" multiple data-live-search="true">
+                <option>Project 1</option>
+                <option>Project 2</option>
+                <option>Project 3</option>
+            </select>
+        </div>
+    </div>
     <form class="form-horizontal" id="estimationForm" enctype="multipart/form-data" method="POST" action="{{ url('/estimation') }}">
         {{ csrf_field() }}
         <table class="table table-hover mb-5">

@@ -10728,3 +10728,7 @@ h1.site-name {
   padding: 5px;
 }
 
+footer > img {
+  max-height: 20px;
+}
+

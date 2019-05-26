@@ -8,6 +8,8 @@ require('./bootstrap');
 
 
 $(document).ready(function() {
+    $('.selectpicker').selectpicker();
+
     var bloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
