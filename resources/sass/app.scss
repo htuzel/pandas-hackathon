@@ -57,3 +57,16 @@ h1.site-name {
     margin-top: 1px;
     width: 100%;
 }
+
+.resultcard {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.resultlabel {
+    background: linear-gradient(110deg,#6059f6,#8782ee);
+    color: #fff;
+    padding: 5px;
+}

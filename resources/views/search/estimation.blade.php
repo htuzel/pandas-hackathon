@@ -27,10 +27,15 @@
         $resultJSON = json_decode($resultArray);
     @endphp
    
-    <h4 class="mb-4">The Estimation Of Esè : <span id="estimation"></span></h4>
-    <div class="row">
+    <h4 class="mb-4">The Estimation Of Esè : </h4>
+    <div class=row>
+        <div class="resultcard card col-12 p-5">
+           <span id="estimation"></span>
+        </div>
+    </div>
+    <div class="row mt-5">
         <div class="col-12">
-            <div class="card">
+            <div class="resultcard card">
               <div class="card-body">
                     <div/>
                         <canvas id="Chart"></canvas>
@@ -39,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="card my-5 p-4">
+    <div class="resultcard card my-5 p-4">
         <div class="row">
             <div class="col-9">
                 <div class="card">
@@ -51,7 +56,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <div class="card">
+                <div class="resultcard card">
                   <div class="card-body">
                     @foreach($resultJSON as $indexkey => $result)
                         <div class="form-check">
