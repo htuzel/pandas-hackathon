@@ -36,14 +36,15 @@
     @else
     <div class="row">
         <div class="col-6"><h2 class="mb-4">Search Results:</h2></div>
+        <!-- 
         <div class="col-6 text-right">
             Filter results by Component: 
             <select class="selectpicker" multiple data-live-search="true">
-                <option>Project 1</option>
-                <option>Project 2</option>
-                <option>Project 3</option>
+                @foreach ($resultJSON as $result)
+                    <option value="{{ $result->componentName }}">{{ $result->componentName }}</option>
+                @endforeach
             </select>
-        </div>
+        </div>-->
     </div>
     <form class="form-horizontal" id="estimationForm" enctype="multipart/form-data" method="POST" action="{{ url('/estimation') }}">
         {{ csrf_field() }}
@@ -88,5 +89,25 @@
     </form>
     @endif
 </div>
+<script>
+function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
+</script>
 @endsection
