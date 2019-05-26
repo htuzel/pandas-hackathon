@@ -70,7 +70,7 @@
                         $loggedHour = floor(($result->realTime - $loggedDay * 1440) / 60);
                         $loggedMinute = $result->realTime - ($loggedDay * 1440) - ($loggedHour * 60);
                     @endphp
-                    <th scope="row"><input type="checkbox" name="search_string_array[]" value="{{ $result->componentName }}"></th>
+                    <th scope="row"><input type="checkbox" name="search_string_array[]" value="{{ $result->project }}"></th>
                     <th scope="row">{{ $loop->index+1 }}</th>
                     <td>{{ $result->project }}</td>
                     <td>{{ $result->componentName }}</td>
