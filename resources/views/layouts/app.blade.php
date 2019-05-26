@@ -24,7 +24,7 @@
 <body class="pb-5">
     @yield('content')
     <footer class="border-top text-center py-3 fixed-bottom bg-white">
-        Made with <i class="far fa-heart"></i> by <b>Heavy Metal Pandas</b> <img src="{{ asset('panda.png') }}">
+        Made with <i class="fas fa-heart" style="color: red"></i> by <b>Heavy Metal Pandas</b> <img src="{{ asset('panda.png') }}">
     </footer>
     <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 </body>
