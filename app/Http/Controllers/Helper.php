@@ -52,6 +52,7 @@ class Helper {
     public static function convertJiraTime($jiraTime) {
         $arrayTime = str_split($jiraTime);
         $convertedTime = null;
+        $calculateSecond = 0;
         $temp1 = str_replace('P', '', $arrayTime);
         $temp2 = str_replace('T', '', $temp1);
         $temp3 = str_replace('H', ':', $temp2);
@@ -68,7 +69,9 @@ class Helper {
         $convertedTime = str_replace('M', '', $convertedTime);
 
         $calculateSecondArray = explode(':', $convertedTime);
-        $calculateSecond = $calculateSecondArray[0] * 60 + $calculateSecondArray[1];
+        if (count($calculateSecondArray) == 2) {
+            $calculateSecond = (int)$calculateSecondArray[0] * 60 + $calculateSecondArray[1];
+        }
 
         return response()->json([
             'convertedTime' => $convertedTime,
