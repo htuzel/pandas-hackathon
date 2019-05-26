@@ -31,9 +31,15 @@ class SearchController extends Controller
 
     public function estimation (SearchRequest $request) {
         $searchQuery = $request->input('search_string');
+        $searchQueryArray = $request->input('search_string_array');
+
+        if ($searchQueryArray != null) {
+            $searchQuery = array_unique($searchQueryArray);
+        }
+
         $resultArray = Helper::getSearchResults($searchQuery);
 
-        if (is_array($searchQuery)) {
+        if ($searchQueryArray != null) {
             $searchQuery = implode(', ', $searchQuery);
         }
 

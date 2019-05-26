@@ -27,7 +27,7 @@
         $resultJSON = json_decode($resultArray);
     @endphp
    
-    <h4 class="mb-4">The Estimation Of Esè :</h4>
+    <h4 class="mb-4">The Estimation Of Esè : <span id="estimation"></span></h4>
     <div class="row">
         <div class="offset-1 col-10 p-5"/>
             <canvas id="Chart"></canvas>
@@ -100,6 +100,38 @@ var mixedChart = new Chart(ctx, {
 				}
 			}
 });
+
+//KNN algorithm
+var outputs = [];
+
+for (var i = 0; i < estimatedTimes.length; i++) {
+    outputs.push([estimatedTimes[i], loggedTimes[i]]);
+}
+
+var estimationResult = knn(outputs, 2);
+$('#estimation').html(estimationResult);
+
+function distiance(pointA, pointB) {
+    return _.chain(pointA)
+            .zip(pointB)
+            .map(([a, b]) => (a - b) ** 2)
+            .sum()
+            .value() ** 0.5;
+}
+
+function knn(data, k) {
+    return _.chain(data)
+            .map(row => [distiance(outputs[0], outputs[1]), row[1]])
+            .sortBy(row => row[0])
+            .slice(0, k)
+            .countBy(row => row[1])
+            .toPairs()
+            .sortBy(row => row[1])
+            .last()
+            .first()
+            .parseInt()
+            .value();
+}
 </script>
 
 @endsection
