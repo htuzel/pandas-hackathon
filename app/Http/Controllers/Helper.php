@@ -23,6 +23,13 @@ class Helper {
         return $q;
     }
 
+    public static function components() {
+        $components = self::db()->from('components')
+                        ->get();
+                    
+        return array_values($components);  
+    }
+
     public static function projects() {
         $projects = self::db()->from('projects')
                         ->get();

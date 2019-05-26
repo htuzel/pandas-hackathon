@@ -21,8 +21,13 @@ class SearchController extends Controller
     }
 
     public function recommendations(Request $request) {
-        $componentNames = Helper::componentNames();
-        $filtered = $componentNames->filter(function($value, $key) use ($request) {
+        /* This function takes component names dynamically. but we used static data for performance.
+        (our datas format limited us. if we can access real data, performance is not a big deal)
+         $componentNames = Helper::componentNames();
+        */
+        $componentNames = Components::get();
+        $componentCollection = collect($componentNames);
+        $filtered = $componentCollection->filter(function($value, $key) use ($request) {
             return stripos($value, $request->input('q')) !== false;
         });
 

@@ -17,8 +17,8 @@ class ProjectController extends Controller
     }
 
     public function componentNames () {
-        $componentNames = Helper::componentNames();
-        return array_values($componentNames->toArray());    
+        $componentNames = Components::get();
+        return $componentNames;    
     }
 
     public function issues () {
