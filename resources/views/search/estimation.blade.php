@@ -298,13 +298,47 @@ for (var i = 0; i < estimatedTimes.length; i++) {
 }
 
 var estimationResult = knn(outputs, 2);
-$('#total').html(estimationResult);
-$('#bd').html( Math.round(percBD * estimationResult / 100) );
-$('#fd').html( Math.round(percFD * estimationResult / 100) );
-$('#sa').html( Math.round(percSA * estimationResult / 100) );
-$('#qa').html( Math.round(percQA * estimationResult / 100) );
-$('#pm').html( Math.round(percPM * estimationResult / 100) );
-$('#ba').html( Math.round(percBA * estimationResult / 100) );
+TotalMinute = estimationResult;
+Day = Math.floor(TotalMinute / 1440);
+Hour = Math.floor((TotalMinute - Day * 1440) / 60);
+Minute = Math.ceil(TotalMinute - (Day * 1440) - (Hour * 60));
+$('#total').html( Day+"d " + Hour + "h " + Minute + "m");
+
+bdTotalMinute = percBD * estimationResult / 100;
+bdDay = Math.floor(bdTotalMinute / 1440);
+bdHour = Math.floor((bdTotalMinute - bdDay * 1440) / 60);
+bdMinute = Math.ceil(bdTotalMinute - (bdDay * 1440) - (bdHour * 60));
+$('#bd').html( bdDay + "d " + bdHour + "h " + bdMinute+"m");
+
+fdTotalMinute = percFD * estimationResult / 100;
+fdDay = Math.floor(fdTotalMinute / 1440);
+fdHour = Math.floor((fdTotalMinute - fdDay * 1440) / 60);
+fdMinute = Math.ceil(fdTotalMinute - (fdDay * 1440) - (fdHour * 60));
+$('#fd').html( fdDay + "d " + fdHour + "h " + fdMinute+"m");
+
+saTotalMinute = percSA * estimationResult / 100;
+saDay = Math.floor(saTotalMinute / 1440);
+saHour = Math.floor((saTotalMinute - saDay * 1440) / 60);
+saMinute = Math.ceil(saTotalMinute - (saDay * 1440) - (saHour * 60));
+$('#sa').html( saDay + "d " + saHour + "h " + saMinute+"m");
+
+qaTotalMinute = percQA * estimationResult / 100;
+qaDay = Math.floor(qaTotalMinute / 1440);
+qaHour = Math.floor((qaTotalMinute - qaDay * 1440) / 60);
+qaMinute = Math.ceil(qaTotalMinute - (qaDay * 1440) - (qaHour * 60));
+$('#qa').html( qaDay + "d " + qaHour + "h " + qaMinute+"m");
+
+baTotalMinute = percBA * estimationResult / 100;
+baDay = Math.floor(baTotalMinute / 1440);
+baHour = Math.floor((baTotalMinute - baDay * 1440) / 60);
+baMinute = Math.ceil(baTotalMinute - (baDay * 1440) - (baHour * 60));
+$('#ba').html( baDay + "d " + baHour + "h " + baMinute+"m");
+
+pmTotalMinute = percPM * estimationResult / 100;
+pmDay = Math.floor(pmTotalMinute / 1440);
+pmHour = Math.floor((pmTotalMinute - pmDay * 1440) / 60);
+pmMinute = Math.ceil(pmTotalMinute - (pmDay * 1440) - (pmHour * 60));
+$('#pm').html( pmDay + "d " + pmHour + "h " + pmMinute+"m");
 
 function distiance(pointA, pointB) {
     return _.chain(pointA)
