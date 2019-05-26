@@ -14,7 +14,7 @@
                 </div>
             </div>
             @if ($errors->has('search_string'))
-            <div class="invalid-feedback">{{ $errors->first('search_string') }}</div>
+                <div class="invalid-feedback">{{ $errors->first('search_string') }}</div>
             @endif
         </form>
     </div>
