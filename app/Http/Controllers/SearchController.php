@@ -8,23 +8,19 @@ use GuzzleHttp\Client;
 
 class SearchController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $results = null;
         return view('search/results', compact('results'));
     }
 
-    public function search(SearchRequest $request)
-    {
+    public function search(SearchRequest $request) {
         $searchQuery = $request->input('search_string');
         $resultArray = Helper::getSearchResults($searchQuery);
 
         return view('search/index', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
     }
 
-    public function recommendations(Request $request)
-    {
-
+    public function recommendations(Request $request) {
         $componentNames = Helper::componentNames();
         $filtered = $componentNames->filter(function($value, $key) use ($request) {
             return stripos($value, $request->input('q')) !== false;
@@ -33,13 +29,13 @@ class SearchController extends Controller
         return $filtered;
     }
 
-    public function estimation (Request $request) {
-        $request->validate([
-            'search_string' => 'required'
-        ]);
-
+    public function estimation (SearchRequest $request) {
         $searchQuery = $request->input('search_string');
         $resultArray = Helper::getSearchResults($searchQuery);
+
+        if (is_array($searchQuery)) {
+            $searchQuery = implode(', ', $searchQuery);
+        }
 
         return view('search/estimation', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
     }

@@ -60,7 +60,7 @@
                         $loggedHour = floor(($result->realTime - $loggedDay * 1440) / 60);
                         $loggedMinute = $result->realTime - ($loggedDay * 1440) - ($loggedHour * 60);
                     @endphp
-                    <th scope="row"><input type="checkbox" name="component[]" value="{{ $loop->index+1 }}"></th>
+                    <th scope="row"><input type="checkbox" name="search_string[]" value="{{ $result->componentName }}"></th>
                     <th scope="row">{{ $loop->index+1 }}</th>
                     <td>{{ $result->project }}</td>
                     <td>{{ $result->componentName }}</td>
@@ -72,7 +72,6 @@
             </tbody>
         </table>
         <div class="text-right">
-            <input type="hidden" name="search_string" value="{{ $searchQuery }}"/>
             <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-project-diagram"></i> Recommend me an <b>Estimation</b> <i class="fa fa-angle-right"></i></button>
         </div>
     </form>

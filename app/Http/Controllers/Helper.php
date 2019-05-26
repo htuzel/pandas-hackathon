@@ -49,8 +49,7 @@ class Helper {
         return collect($components);
     }
 
-    public static function convertJiraTime($jiraTime)
-    {
+    public static function convertJiraTime($jiraTime) {
         $arrayTime = str_split($jiraTime);
         $convertedTime = null;
         $temp1 = str_replace('P', '', $arrayTime);
@@ -94,47 +93,42 @@ class Helper {
         }
     }
 
-    public static function fixSearchString($string)
-    {
+    public static function fixSearchString($string) {
         $components = Helper::componentNames();
         $result = [];
 
         foreach ($components as $component) {
-            if (preg_match("/(?i)({$string})/", $component)) {
-                array_push($result, $component);
+            if (!is_array($string)) {
+                if (preg_match("/(?i)({$string})/", $component)) {
+                    array_push($result, $component);
+                }
+            } else {
+                foreach ($string as $item) {
+                    if (preg_match("/(?i)({$item})/", $component)) {
+                        array_push($result, $component);
+                    }
+                }
             }
         }
 
         return $result;
     }
 
-    public static function getSearchResults($string) {
-
-        $resultArray = []; // Stores trimmed results
-        $searchQuery = $string;
-        $client = new Client();
-
+    public static function getSearchResults($searchQuery) {
         $searchEngines = Helper::fixSearchString($searchQuery);
-
-        $response = $client->get('http://localhost:3004/projects', [
-            'headers' => [
-                'Accept ' => 'application/json',
-                'Content-Type' => 'application/x-www-form-urlencoded'
-            ]
-        ]);
-
-        $results = json_decode($response->getBody(), true);
+        $results = self::db()->from('projects')->get();
+        $resultArray = []; // Stores trimmed results
 
         foreach ($searchEngines as $searchEngine) {
             foreach ($results as $result){
+                $writeAccess = false; // Ignore empty worklogs
                 $issues = $result['issues'];
                 $projectArray = [];
                 $worklogArray = [];
                 $bugArray = [];
-                $writeAccess = false; // Ignore empty worklogs
-                $totalSpendTime = 0;
                 $projectArray['realTime'] = 0;
                 $projectArray['originalEstimate'] = 0;
+                $totalSpendTime = 0;
                 $bugCounter = 0;
 
                 if ($issues != null) {
@@ -181,8 +175,7 @@ class Helper {
         return $resultArray;
     }
 
-    public static function calculateDepartment($workLogs)
-    {
+    public static function calculateDepartment($workLogs) {
         $workLogArray['BD'] = 0;
         $workLogArray['FD'] = 0;
         $workLogArray['SA'] = 0;
