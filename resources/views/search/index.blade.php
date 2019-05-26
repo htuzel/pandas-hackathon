@@ -31,7 +31,7 @@
             <h1 class="display-4">Sorry, No result found <i class="far fa-sad-cry"></i></h1>
             <p class="lead">Please try again with a new keyword.</p>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-angle-left"></i> Go Back</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button"><i class="fa fa-angle-left"></i> Go Back</a>
         </div>
     @else
     <h2 class="mb-4">Search Results:</h2>
