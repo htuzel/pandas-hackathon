@@ -119,15 +119,31 @@ var percBA = 0;
 
 
 @foreach($resultJSON as $result)
-    labels.push('{{$result->project}}');
-    estimatedTimes.push('{{$result->originalEstimate}}');
-    loggedTimes.push('{{$result->realTime}}');
-    BD.push('{{$result->departmenents->BD}}');
-    FD.push('{{$result->departmenents->FD}}');
-    SA.push('{{$result->departmenents->SA}}');
-    QA.push('{{$result->departmenents->QA}}');
-    PM.push('{{$result->departmenents->PM}}');
-    BA.push('{{$result->departmenents->BA}}');
+    @if($searchQueryArray != null)
+        @foreach($searchQueryArray as $src)
+            @if($src == $result->project)
+                labels.push('{{$result->project}}');
+                estimatedTimes.push('{{$result->originalEstimate}}');
+                loggedTimes.push('{{$result->realTime}}');
+                BD.push('{{$result->departmenents->BD}}');
+                FD.push('{{$result->departmenents->FD}}');
+                SA.push('{{$result->departmenents->SA}}');
+                QA.push('{{$result->departmenents->QA}}');
+                PM.push('{{$result->departmenents->PM}}');
+                BA.push('{{$result->departmenents->BA}}');
+            @endif
+        @endforeach
+    @else
+        labels.push('{{$result->project}}');
+        estimatedTimes.push('{{$result->originalEstimate}}');
+        loggedTimes.push('{{$result->realTime}}');
+        BD.push('{{$result->departmenents->BD}}');
+        FD.push('{{$result->departmenents->FD}}');
+        SA.push('{{$result->departmenents->SA}}');
+        QA.push('{{$result->departmenents->QA}}');
+        PM.push('{{$result->departmenents->PM}}');
+        BA.push('{{$result->departmenents->BA}}');
+    @endif
 @endforeach
 
 

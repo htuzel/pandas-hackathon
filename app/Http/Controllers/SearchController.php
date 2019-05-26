@@ -33,16 +33,8 @@ class SearchController extends Controller
         $searchQuery = $request->input('search_string');
         $searchQueryArray = $request->input('search_string_array');
 
-        if ($searchQueryArray != null) {
-            $searchQuery = array_unique($searchQueryArray);
-        }
-
         $resultArray = Helper::getSearchResults($searchQuery);
 
-        if ($searchQueryArray != null) {
-            $searchQuery = implode(', ', $searchQuery);
-        }
-
-        return view('search/estimation', compact('searchQuery'))->with('resultArray', json_encode($resultArray));
+        return view('search/estimation', compact('searchQuery', 'searchQueryArray'))->with('resultArray', json_encode($resultArray));
     }
 }

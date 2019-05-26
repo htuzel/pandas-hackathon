@@ -123,7 +123,7 @@ class Helper {
 
     public static function countString($string)
     {
-        if (strlen($string) > 2) {
+        if (strlen($string) > 1) {
             return true;
         }
         return false;
